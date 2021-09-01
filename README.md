@@ -18,12 +18,15 @@ in the same container. This means:
 Run
 ---
 
+The host IP address should be passed by ADVERTISED_HOST.
+The "Your-Host-IP" should be replaced by your host IP address, such as 192.168.0.102
+
 ```bash
-docker run -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=`docker-machine ip \`docker-machine active\`` --env ADVERTISED_PORT=9092 spotify/kafka
+docker run -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=Your-Host-IP --env ADVERTISED_PORT=9092 spotify/kafka
 ```
 
 ```bash
-export KAFKA=`docker-machine ip \`docker-machine active\``:9092
+export KAFKA=You-Host-IP:9092
 kafka-console-producer.sh --broker-list $KAFKA --topic test
 ```
 
@@ -43,7 +46,7 @@ Take the same parameters as the spotify/kafka image with some new ones:
 
 ```bash
 docker run -p 2181:2181 -p 9092:9092 \
-    --env ADVERTISED_HOST=`boot2docker ip` \
+    --env ADVERTISED_HOST=You-Host-IP \
     --env ADVERTISED_PORT=9092 \
     --env CONSUMER_THREADS=1 \
     --env TOPICS=my-topic,some-other-topic \
